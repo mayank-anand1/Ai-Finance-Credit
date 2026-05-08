@@ -11,6 +11,8 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
+  console.log("Starting server initialization...");
+
   app.use(express.json());
 
   // API Routes
@@ -23,6 +25,7 @@ async function startServer() {
       const logs = getLogs();
       res.json(logs);
     } catch (error) {
+      console.error("Fetch logs error:", error);
       res.status(500).json({ error: "Failed to fetch logs" });
     }
   });
@@ -32,20 +35,25 @@ async function startServer() {
       logAction(req.body);
       res.json({ success: true });
     } catch (error) {
-      console.error("Log error:", error);
+      console.error("Log action error:", error);
       res.status(500).json({ error: "Failed to save log" });
     }
   });
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
+    console.log("Running in DEVELOPMENT mode with Vite middleware");
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: { 
+        middlewareMode: true,
+        host: '0.0.0.0',
+        port: 3000
+      },
       appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
-    // Production setup
+    console.log("Running in PRODUCTION mode");
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
@@ -54,8 +62,10 @@ async function startServer() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`>>> Server is actively listening on http://0.0.0.0:${PORT}`);
   });
 }
 
-startServer();
+startServer().catch(err => {
+  console.error("Failed to start server:", err);
+});
