@@ -1,0 +1,7 @@
+invoice_no,client_name,amount,due_date,email,followup_count,payment_link
+INV-001,Acme Corp,1250.00,2026-05-01,finance@acme.com,0,https://pay.example.com/inv001
+INV-002,Globex Inc,4500.50,2026-04-25,billing@globex.com,1,https://pay.example.com/inv002
+INV-003,Stark Industries,890.00,2026-04-10,pepper@stark.com,2,https://pay.example.com/inv003
+INV-004,Wayne Enterprises,12000.00,2026-03-25,accounting@wayne.com,3,https://pay.example.com/inv004
+INV-005,Oscorp,3200.00,2026-05-07,p.osborn@oscorp.com,0,https://pay.example.com/inv005
+INV-006,Soylent Corp,500.00,2026-05-15,info@soylent.com,0,https://pay.example.com/inv006

@@ -1,0 +1,6 @@
+{
+  "name": "CreditQuest: AI Finance Credit Follow-Up",
+  "description": "An AI-powered credit control agent that automates overdue invoice detection, escalation logic, and professional email generation using Gemini AI. Built as a professional internship project for finance teams.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
