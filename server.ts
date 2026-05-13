@@ -95,6 +95,7 @@ async function startServer() {
     client_name: z.string().max(100),
     overdue_days: z.number().int(),
     escalation_stage: z.number().int(),
+    tone: z.string().max(50),
     subject: z.string().max(500),
     send_status: z.string().max(50),
     dry_run: z.boolean(),
@@ -127,6 +128,7 @@ async function startServer() {
           client_name: "SYSTEM",
           overdue_days: 0,
           escalation_stage: 0,
+          tone: "N/A",
           subject: "User login successful",
           send_status: "SUCCESS",
           dry_run: true
@@ -139,6 +141,7 @@ async function startServer() {
           client_name: "SYSTEM",
           overdue_days: 0,
           escalation_stage: 0,
+          tone: "N/A",
           subject: `Failed login attempt for ${email}`,
           send_status: "FAILURE",
           dry_run: true

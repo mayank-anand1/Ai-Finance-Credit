@@ -202,6 +202,7 @@ export default function App() {
         client_name: email.invoice.client_name,
         overdue_days: email.invoice.escalation!.overdueDays,
         escalation_stage: email.invoice.escalation!.stage,
+        tone: email.invoice.escalation!.tone,
         subject: email.subject,
         send_status: 'DRAFT_GENERATED',
         dry_run: isDryRun
@@ -230,6 +231,7 @@ export default function App() {
           client_name: sentEmail.invoice.client_name,
           overdue_days: sentEmail.invoice.escalation!.overdueDays,
           escalation_stage: sentEmail.invoice.escalation!.stage,
+          tone: sentEmail.invoice.escalation!.tone,
           subject: sentEmail.subject,
           send_status: 'DISPATCHED',
           dry_run: false
@@ -825,6 +827,7 @@ export default function App() {
                          <th className="px-6 py-4 font-bold text-[#8a968d] uppercase tracking-widest">Invoice</th>
                          <th className="px-6 py-4 font-bold text-[#8a968d] uppercase tracking-widest">Client</th>
                          <th className="px-6 py-4 font-bold text-[#8a968d] uppercase tracking-widest">Protocol Status</th>
+                         <th className="px-6 py-4 font-bold text-[#8a968d] uppercase tracking-widest">Escalation Tone</th>
                          <th className="px-6 py-4 font-bold text-[#8a968d] uppercase tracking-widest">Subject</th>
                        </tr>
                      </thead>
@@ -839,6 +842,7 @@ export default function App() {
                                  {log.send_status}
                                </span>
                             </td>
+                            <td className="px-6 py-4 text-[#6b776d] italic font-serif opacity-80">{log.tone}</td>
                             <td className="px-6 py-4 text-[#6b776d] truncate max-w-xs">{log.subject}</td>
                           </tr>
                         ))}

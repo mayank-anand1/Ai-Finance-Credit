@@ -7,6 +7,7 @@ export interface AuditLog {
   client_name: string;
   overdue_days: number;
   escalation_stage: number;
+  tone: string;
   subject: string;
   send_status: string;
   dry_run: boolean;
