@@ -25,6 +25,18 @@ export async function saveLog(log: AuditLog) {
   return response.json();
 }
 
+export async function saveLogsBatch(logs: AuditLog[]) {
+  const response = await fetch('/api/logs/batch', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(logs),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to save batch logs');
+  }
+  return response.json();
+}
+
 export async function fetchLogs(): Promise<AuditLog[]> {
   const response = await fetch('/api/logs');
   if (!response.ok) {

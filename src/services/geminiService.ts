@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { EscalationStage } from "../utils/finance";
+import { EscalationStage } from "../types";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 
@@ -21,6 +21,15 @@ export interface GeneratedEmail {
 
 const SYSTEM_PROMPT = `You are a professional Senior Credit Control Officer at a reputable firm. 
 Your task is to draft a collection follow-up email for an overdue invoice.
+
+FORMATTING REQUIREMENTS:
+1. Use Markdown for styling.
+2. Bold key information: Invoice numbers, Due Dates, and Amounts.
+3. Use a clear, structured layout. Use bullet points to summarize invoice details for readability.
+4. Separate paragraphs clearly with double newlines.
+5. Use a professional sign-off.
+6. The body should look polished when rendered in a Markdown viewer.
+
 CRITICAL RULES:
 1. Use ONLY the data provided. Do not hallucinate figures.
 2. Maintain a professional, business-centric tone.
@@ -71,7 +80,16 @@ export async function generateFollowUpEmail(data: EmailData): Promise<GeneratedE
     console.error("Gemini generation error:", error);
     return {
       subject: `Follow-up: Invoice ${data.invoice_no} overdue`,
-      body: `Dear ${data.client_name},\n\nThis is a reminder regarding invoice ${data.invoice_no} for ${data.amount} which was due on ${data.due_date}. Please settle this via ${data.payment_link} as soon as possible.\n\nBest regards,\nCredit Control Team`
+      body: `Dear **${data.client_name}**,
+
+This is a reminder regarding invoice **${data.invoice_no}** for **${data.amount}** which was due on **${data.due_date}**.
+
+Please settle this as soon as possible via the link below:
+
+[Pay Invoice Now](${data.payment_link})
+
+Best regards,
+**Credit Control Team**`
     };
   }
 }

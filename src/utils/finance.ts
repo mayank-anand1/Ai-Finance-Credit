@@ -2,20 +2,7 @@
  * Escalation Logic for Credit Follow-Up (Frontend version)
  */
 
-export enum EscalationStage {
-  STAGE_1 = 1,
-  STAGE_2 = 2,
-  STAGE_3 = 3,
-  STAGE_4 = 4,
-  ESCALATED = 5,
-}
-
-export interface EscalationInfo {
-  stage: EscalationStage;
-  tone: string;
-  description: string;
-  overdueDays: number;
-}
+import { EscalationInfo, EscalationStage } from '../types';
 
 export function calculateEscalation(dueDateStr: string): EscalationInfo {
   const dueDate = new Date(dueDateStr);
