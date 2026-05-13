@@ -1,7 +1,6 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
-import { fileURLToPath } from "url";
 import nodemailer from "nodemailer";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
@@ -11,8 +10,8 @@ import { logAction, getLogs } from "./utils/logger.ts";
 import { authenticateRequest, agentRateLimiter } from "./src/middleware/auth.ts";
 import { maskPII, sanitizeInput } from "./src/utils/security.ts";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Use process.cwd() for path resolution in production to avoid ESM/CJS compatibility issues
+const DATA_DIR = path.join(process.cwd(), "data");
 
 /**
  * Lazy initialization of the mail transporter to handle missing environment variables gracefully.
